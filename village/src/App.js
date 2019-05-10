@@ -3,6 +3,7 @@ import axios from 'axios'
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+import UpdateForm from './components/UpdateForm'
 import { Route, NavLink } from 'react-router-dom'
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       smurfs: [],
+      activeItem: null
     };
   }
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
@@ -36,19 +38,43 @@ class App extends Component {
     this.props.history.push('/')
   }
 
+  updateItem = (updatedItem) => {
+    axios.put(`http://localhost:3333/smurfs/${updatedItem.id}`, updatedItem)
+      .then(res => {
+        console.log(res)
+        this.setState({
+          smurfs: res.data
+        })
+        this.props.history.push('/')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  setUpdateForm = smurf => {
+    console.log('update form data ' + smurf.name)
+    this.setState({
+      activeItem: smurf
+    })
+
+    this.props.history.push('/smurf-update')
+    // console.log('update form data in state'+this.state.activeItem.name)
+  }
+
   deleteItem = id => {
     axios.delete(`http://localhost:3333/smurfs/${id}`)
-    .then(res => {
-      console.log(res)
-      this.setState({
-        smurfs:res.data
+      .then(res => {
+        console.log(res)
+        this.setState({
+          smurfs: res.data
+        })
+        this.props.history.push('/')
       })
-      this.props.history.push('/')
-    })
-    .catch(err => {
-      console.log(err)
-    })
-      
+      .catch(err => {
+        console.log(err)
+      })
+
   }
 
   render() {
@@ -71,13 +97,22 @@ class App extends Component {
           )}
         />
 
-        {/* <SmurfForm addSmurf={this.addSmurf}/> */}
+        <Route path='/smurf-update'
+          render={props => (
+            <UpdateForm {...props}
+              activeItem={this.state.activeItem}
+              updateItem={this.updateItem}
+            />
+          )}
+        />
+
 
         <Route exact path='/'
           render={props => (
-            <Smurfs
+            <Smurfs {...props}
               smurfs={this.state.smurfs}
               deleteItem={this.deleteItem}
+              setUpdateForm={this.setUpdateForm}
             />
           )}
         />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Smurf from './Smurf';
 
 class Smurfs extends Component {
@@ -10,17 +10,16 @@ class Smurfs extends Component {
         <ul className='all-smurfs'>
           {this.props.smurfs.map(smurf => {
             return (
-              <Route  exact path='/'
+              <Route exact path='/'
                 render={props => (
-              <Smurf {...props}
-                deleteItem={this.props.deleteItem}
-                name={smurf.name}
-                id={smurf.id}
-                age={smurf.age}
-                height={smurf.height}
-                key={smurf.id}
-              />
-              )} />
+                  <Smurf {...props}
+                    deleteItem={this.props.deleteItem}
+                    setUpdateForm={this.props.setUpdateForm}
+                    details={smurf}
+
+                    key={smurf.id}
+                  />
+                )} />
             );
           })}
         </ul>
@@ -30,7 +29,7 @@ class Smurfs extends Component {
 }
 
 Smurf.defaultProps = {
- smurfs: [],
+  smurfs: [],
 };
 
 export default Smurfs;
