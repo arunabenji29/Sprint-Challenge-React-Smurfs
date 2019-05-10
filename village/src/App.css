@@ -1,3 +1,18 @@
 .App {
   text-align: center;
 }
+
+.all-smurfs{
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+
+.Smurf {
+  width: 250px;
+  margin: 0 10px 32px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
