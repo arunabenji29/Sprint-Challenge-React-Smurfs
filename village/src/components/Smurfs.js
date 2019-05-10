@@ -13,6 +13,7 @@ class Smurfs extends Component {
               <Route  exact path='/'
                 render={props => (
               <Smurf {...props}
+                deleteItem={this.props.deleteItem}
                 name={smurf.name}
                 id={smurf.id}
                 age={smurf.age}
