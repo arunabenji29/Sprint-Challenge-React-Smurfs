@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Smurf = props => {
-
+  console.log(props.match.params.id)
   const deleteItem = (event,smurf) => {
     
     event.preventDefault();
@@ -17,11 +17,18 @@ const Smurf = props => {
     props.setUpdateForm(smurf)
   }
 
+  const routeToItem = (event, smurf) => {
+    event.preventDefault();
+    props.history.push(`/smurf/${smurf.id}`);
+  }
+
   return (
     <div className="Smurf">
+    <div onClick={event => routeToItem(event,props.details)}>
       <h3>{props.details.name}</h3>
       <strong>{props.details.height} tall</strong>
       <p>{props.details.age} smurf years old</p>
+      </div>
       <button onClick={event => updateForm(event,props.details)}>Update</button>
       <button onClick={event => deleteItem(event,props.details)}>Delete</button>
     </div>

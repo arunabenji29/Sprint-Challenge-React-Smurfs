@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
+import { Route,Link } from 'react-router-dom'
 import Smurf from './Smurf';
 
 class Smurfs extends Component {
@@ -9,6 +9,7 @@ class Smurfs extends Component {
         <h1>Smurf Village</h1>
         <ul className='all-smurfs'>
           {this.props.smurfs.map(smurf => {
+            
             return (
               <Route exact path='/'
                 render={props => (

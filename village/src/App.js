@@ -5,6 +5,7 @@ import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import UpdateForm from './components/UpdateForm'
 import { Route, NavLink } from 'react-router-dom'
+import SeparateSmurf from './components/SeparateSmurf';
 
 class App extends Component {
   constructor(props) {
@@ -115,6 +116,14 @@ class App extends Component {
               setUpdateForm={this.setUpdateForm}
             />
           )}
+        />
+
+        <Route path='/smurf/:id' 
+        render={props => (
+          <SeparateSmurf {...props}
+            smurfs={this.state.smurfs}
+            />
+        )}
         />
       </div>
     );
